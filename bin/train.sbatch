@@ -1,12 +1,15 @@
 #!/bin/bash --login
-#SBATCH --time=2:00:00
-#SBATCH --gpus-per-node=v100:1
-#SBATCH --cpus-per-gpu=4  
-#SBATCH --mem=64G 
-#SBATCH --partition=batch 
+#SBATCH -N 1
+#SBATCH --partition=batch
+#SBATCH -J MyJob
+#SBATCH -o MyJob.%J.out
+#SBATCH -e MyJob.%J.err
+#SBATCH --mail-user=abdelrahman.sabbagh@kaust.edu.sa
 #SBATCH --mail-type=ALL
-#SBATCH --output=results/%x/%j-slurm.out
-#SBATCH --error=results/%x/%j-slurm.err
+#SBATCH --time=03:30:00
+#SBATCH --mem=200M
+#SBATCH --gres=gpu:1
+#SBATCH --constraint=gpu
 
 # entire script fails if single command fails
 set -e
